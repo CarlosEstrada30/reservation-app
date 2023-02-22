@@ -51,7 +51,7 @@ class App extends Component {
               <Menu.Item>
                 <Input placeholder="Search..." size="small" />
               </Menu.Item>
-              <Menu.Item as="a">Dashboard</Menu.Item>
+              <Menu.Item as="a">Calendar</Menu.Item>
               <Menu.Item as="a">Settings</Menu.Item>
               <Menu.Item as="a">Profile</Menu.Item>
               <Menu.Item as="a">Help</Menu.Item>
@@ -105,21 +105,11 @@ class App extends Component {
           >
             <Menu vertical borderless fluid text>
               <Menu.Item active as="a">
-                Overview
+                Calendar
               </Menu.Item>
-              <Menu.Item as="a">Reports</Menu.Item>
+              <Menu.Item as="a">Sttings</Menu.Item>
               <Menu.Item as="a">Analytics</Menu.Item>
               <Menu.Item as="a">Export</Menu.Item>
-              <Divider hidden />
-              <Menu.Item as="a">Nav item</Menu.Item>
-              <Menu.Item as="a">Nav item again</Menu.Item>
-              <Menu.Item as="a">One more nav</Menu.Item>
-              <Menu.Item as="a">Another nav item</Menu.Item>
-              <Menu.Item as="a">More navigation</Menu.Item>
-              <Divider hidden />
-              <Menu.Item as="a">Macintoch</Menu.Item>
-              <Menu.Item as="a">Linux</Menu.Item>
-              <Menu.Item as="a">Windows</Menu.Item>
             </Menu>
           </Grid.Column>
 

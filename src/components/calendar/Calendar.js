@@ -16,6 +16,9 @@ function Calendar() {
   const [title, setTitle] = useState(null)
   const [phone, setPhone] = useState(null)
   const [start, setstart] = useState(null)
+  const [token, setToken] = useState(null)
+
+  const addOrReplace = (arr, newObj) => [...arr.filter((o) => o.id !== newObj.id), {...newObj}];
 
   useEffect(() => {
     fetch('http://127.0.0.1:5000/api/v1/event')
@@ -39,28 +42,15 @@ function Calendar() {
 
 const handleDateSelect = (selectInfo) => {
   setstart(selectInfo.startStr)
-
   setOpen(true)
 }
 
 
 const handleEventSubmit = (e) => {
-  console.log("submit")
-  console.log(title)
-  console.log(phone)
   e.preventDefault();
 
-  let event = {
-    id: createEventId(),
-    title: title,
-    start: start,
-    extendedProps: {
-      phone: phone
-    },
-  }
-  var newData = [...initailEvents, event]
-
   let data = {
+    token: token,
     title: title,
     phone: phone,
     start: start,
@@ -72,37 +62,65 @@ const handleEventSubmit = (e) => {
     headers:{
       'Content-Type': 'application/json'
     }
-  }).then(res => res.json())
+  }).then(response => response.json())
   .catch(error => console.error('Post Error:', error))
-  .then(response => console.log('Post Success:', response));
-
+  .then(response => {
+    let event = {
+      id: response.token,
+      title: response.title,
+      start: response.start,
+      extendedProps: {
+        phone: response.phone
+      },
+    }
+  //   let newData = initailEvents.map(obj =>
+  //     obj.id === event.id ? event : obj
+  // );
+  let newData = addOrReplace(initailEvents, event)
   setInitialEvents(newData)
+
+  });
+
+  
   setTitle(null)
   setPhone(null)
   setstart(null)
+  setToken(null)
   setOpen(false)
-  // let title = null
-  // let calendarApi = selectInfo.view.calendar
-
-  // calendarApi.unselect() // clear date selection
-
-  // if (title) {
-  //   calendarApi.addEvent({
-  //     id: createEventId(),
-  //     title,
-  //     start: selectInfo.startStr,
-  //     end: selectInfo.endStr,
-  //     allDay: selectInfo.allDay
-  //   })
-  // }
 }
 
 const handleEventClick = (clickInfo) => {
+  setToken(clickInfo.event.id)
+  setstart(clickInfo.event.startStr)
+  setTitle(clickInfo.event.title)
+  setPhone(clickInfo.event.extendedProps.phone)
   setOpen(true)
 }
 
 const handleEvents = (events) => {
   setCurrentEvents(events)
+}
+const handleEventChange = (eventChange) => {
+  console.log(eventChange.oldEvent.id)
+  console.log(eventChange.oldEvent.title)
+  console.log(eventChange.oldEvent.startStr)
+  console.log(eventChange.event.startStr)
+
+  let data = {
+    token: eventChange.event.id,
+    title: eventChange.event.title,
+    phone: eventChange.event.extendedProps.phone,
+    start: eventChange.event.startStr,
+    end: eventChange.event.startStr
+  }
+  fetch('http://127.0.0.1:5000/api/v1/event', {
+    method: 'PUT', // or 'PUT'
+    body: JSON.stringify(data), // data can be `string` or {object}!
+    headers:{
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+  .then(response => console.log('Post Success:', response));
 }
   return (
     <div className="Calendar">
@@ -114,7 +132,7 @@ const handleEvents = (events) => {
               center: 'title',
               right: 'dayGridMonth,timeGridWeek,timeGridDay'
             }}
-            initialView='dayGridMonth'
+            initialView='timeGridWeek'
             editable={true}
             selectable={true}
             selectMirror={true}
@@ -125,13 +143,9 @@ const handleEvents = (events) => {
             eventContent={renderEventContent} // custom render function
             eventClick={handleEventClick}
             eventsSet={handleEvents} 
-            //eventContent={renderEventContent} // custom render function
-             // alternatively, use the `events` setting to fetch from a feed
-            /* you can update a remote database when these fire:
-            eventAdd={function(){}}
-            eventChange={function(){}}
-            eventRemove={function(){}}
-            */
+            // eventAdd={function(){}}
+            eventChange={handleEventChange}
+            // eventRemove={function(){}}
           />
       </div>
       <ModalExampleModal 

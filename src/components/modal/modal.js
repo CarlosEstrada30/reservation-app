@@ -15,11 +15,11 @@ function ModalExampleModal(props) {
       <Modal.Content>
                 <Form.Field>
                 <label>Nombre</label>
-                <input placeholder='First Name' onChange={(event) => props.setTitle(event.target.value)} />
+                <input placeholder='First Name' onChange={(event) => props.setTitle(event.target.value)} value={props.title} />
                 </Form.Field>
                 <Form.Field>
                 <label>Telefono</label>
-                <input placeholder='Last Name' onChange={(event) => props.setPhone(event.target.value)}/>
+                <input placeholder='Last Name' onChange={(event) => props.setPhone(event.target.value)} value={props.phone}/>
                 </Form.Field>
       </Modal.Content>
       <Modal.Actions>
