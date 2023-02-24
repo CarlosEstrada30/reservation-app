@@ -133,6 +133,7 @@ const handleEventChange = (eventChange) => {
               right: 'dayGridMonth,timeGridWeek,timeGridDay'
             }}
             initialView='timeGridWeek'
+            slotMinTime="08:00:00"
             editable={true}
             selectable={true}
             selectMirror={true}
