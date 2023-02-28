@@ -7,6 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
 import ModalExampleModal from '../modal/modal';
 import { Button } from 'semantic-ui-react';
+import { calendarService } from './Calendar.service';
 
 function Calendar() {
   const [initailEvents, setInitialEvents] = useState([])
@@ -20,11 +21,13 @@ function Calendar() {
 
   const addOrReplace = (arr, newObj) => [...arr.filter((o) => o.id !== newObj.id), {...newObj}];
 
+  function removeObjectWithId(arr, id) {
+    return arr.filter((obj) => obj.id !== id);
+  }
+
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/v1/event')
-    .then((response) => response.json())
-    .then(booksList => {
-        const Events = booksList.map((event) => (
+    calendarService.getEvents().then(eventList =>{
+      const Events = eventList.map((event) => (
         {
         id: event.token,
         title: event.title,
@@ -34,15 +37,37 @@ function Calendar() {
         },
       })
       )
-      console.log(Events)
       setInitialEvents(Events);
-    });
+    })
+    
+        
+
 }, [])
 
 
 const handleDateSelect = (selectInfo) => {
   setstart(selectInfo.startStr)
   setOpen(true)
+}
+
+const resetData = () => {
+  setTitle(null)
+  setPhone(null)
+  setstart(null)
+  setToken(null)
+}
+
+const handleDeleteEvent = () =>{
+
+  let newEvents = removeObjectWithId(initailEvents, token)
+  calendarService.del(token).then(response => {
+    console.log(response)
+  });
+  setInitialEvents(newEvents)
+  resetData()
+  setOpen(false)
+ 
+  
 }
 
 
@@ -56,15 +81,7 @@ const handleEventSubmit = (e) => {
     start: start,
     end: start
   }
-  fetch('http://127.0.0.1:5000/api/v1/event', {
-    method: 'POST', // or 'PUT'
-    body: JSON.stringify(data), // data can be `string` or {object}!
-    headers:{
-      'Content-Type': 'application/json'
-    }
-  }).then(response => response.json())
-  .catch(error => console.error('Post Error:', error))
-  .then(response => {
+  calendarService.update_or_create(data).then(response => {
     let event = {
       id: response.token,
       title: response.title,
@@ -73,19 +90,11 @@ const handleEventSubmit = (e) => {
         phone: response.phone
       },
     }
-  //   let newData = initailEvents.map(obj =>
-  //     obj.id === event.id ? event : obj
-  // );
   let newData = addOrReplace(initailEvents, event)
   setInitialEvents(newData)
 
   });
-
-  
-  setTitle(null)
-  setPhone(null)
-  setstart(null)
-  setToken(null)
+  resetData()
   setOpen(false)
 }
 
@@ -101,10 +110,6 @@ const handleEvents = (events) => {
   setCurrentEvents(events)
 }
 const handleEventChange = (eventChange) => {
-  console.log(eventChange.oldEvent.id)
-  console.log(eventChange.oldEvent.title)
-  console.log(eventChange.oldEvent.startStr)
-  console.log(eventChange.event.startStr)
 
   let data = {
     token: eventChange.event.id,
@@ -113,14 +118,8 @@ const handleEventChange = (eventChange) => {
     start: eventChange.event.startStr,
     end: eventChange.event.startStr
   }
-  fetch('http://127.0.0.1:5000/api/v1/event', {
-    method: 'PUT', // or 'PUT'
-    body: JSON.stringify(data), // data can be `string` or {object}!
-    headers:{
-      'Content-Type': 'application/json'
-    }
-  }).then(res => res.json())
-  .then(response => console.log('Post Success:', response));
+  calendarService.update_or_create(data).then(response => console.log('Post Success:', response));
+  resetData()
 }
   return (
     <div className="Calendar">
@@ -157,7 +156,10 @@ const handleEventChange = (eventChange) => {
         setTitle={setTitle}
         phone={phone}
         setPhone={setPhone}
-        start={start}/>
+        start={start}
+        token={token}
+        handleDeleteEvent={handleDeleteEvent}
+        />
     </div>
   );
 }

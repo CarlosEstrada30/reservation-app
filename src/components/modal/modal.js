@@ -23,12 +23,17 @@ function ModalExampleModal(props) {
                 </Form.Field>
       </Modal.Content>
       <Modal.Actions>
+      {props.token &&
+      <Button color='red' onClick={() => props.handleDeleteEvent()}>
+          Eliminar
+        </Button>
+        }
         <Button color='black' onClick={() => props.setOpen(false)}>
-          Cancelar
+          Cerrar
         </Button>
         <Button
             type='submit'
-          content="Reservar"
+          content={props.token ? "Actualizar": "Reservar"}
           labelPosition='right'
           icon='checkmark'
           positive
