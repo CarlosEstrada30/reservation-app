@@ -4,11 +4,9 @@ import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { INITIAL_EVENTS, createEventId } from './event-utils'
 import ModalExampleModal from '../modal/modal';
-import { Button } from 'semantic-ui-react';
+import { Button, Sidebar, Popup } from 'semantic-ui-react';
 import { calendarService } from './Calendar.service';
-
 function Calendar() {
   const [initailEvents, setInitialEvents] = useState([])
   const [weekendsVisible, setWeekendsVisible] = useState(true)
@@ -62,10 +60,11 @@ const handleDeleteEvent = () =>{
   let newEvents = removeObjectWithId(initailEvents, token)
   calendarService.del(token).then(response => {
     console.log(response)
+    setInitialEvents(newEvents)
+    resetData()
+    setOpen(false)
+    console.log("Termino ---")
   });
-  setInitialEvents(newEvents)
-  resetData()
-  setOpen(false)
  
   
 }
@@ -122,10 +121,15 @@ const handleEventChange = (eventChange) => {
   resetData()
 }
   return (
+    
+    <div className="ui container">
+  <div className="ui grid">
+    <div className="ui sixteen column">
     <div className="Calendar">
       <div className="CalendarContainer">
       <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            themeSystem= 'Darkly'
             headerToolbar={{
               left: 'prev,next today',
               center: 'title',
@@ -161,6 +165,10 @@ const handleEventChange = (eventChange) => {
         handleDeleteEvent={handleDeleteEvent}
         />
     </div>
+    </div>
+  </div>
+</div>
+ 
   );
 }
 
@@ -170,8 +178,10 @@ export default Calendar;
 function renderEventContent(eventInfo) {
   return (
     <>
+    <Popup content={eventInfo.event.title} trigger={<div>
       <i>{eventInfo.event.title} ({eventInfo.event.extendedProps.phone}) </i>
       <b>{eventInfo.timeText}</b>
+    </div>} />
     </>
   )
 }
