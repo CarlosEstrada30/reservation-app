@@ -7,7 +7,8 @@ import "semantic-ui-css/semantic.min.css";
 import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
 import CalendarPage from "./pages/Calendar";
 import PublicCalendar from "./pages/PublicCalendar";
-import Login from './components/login/Login'
+import NewReservation from "./pages/NewReservation";
+import LoginPage from './pages/Login'
 
 import "./App.css";
 
@@ -25,16 +26,13 @@ function App() {
 
     return (
       <BrowserRouter>
-      {user ? (
-        <button onClick={logout}>Logout</button>
-      ) : (
-        <button onClick={login}>Login</button>
-      )}
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route element={<ProtectedRoute isAllowed={!!user} />}>
-          <Route path="/calendar" element={<CalendarPage/>} />
+        <Route path="/login" element={<LoginPage />} />
+        
+        <Route>
+          <Route path="/" element={<ProtectedRoute redirectTo="/login"><CalendarPage/></ProtectedRoute>} />
           <Route path="/public-calendar" element={<PublicCalendar/>} />
+          <Route path="/reservation" element={<NewReservation/>} />
         </Route>
       </Routes>
     </BrowserRouter>

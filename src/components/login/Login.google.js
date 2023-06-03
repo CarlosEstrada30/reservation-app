@@ -2,9 +2,10 @@
 // component from the library
 import { GoogleLogin } from '@react-oauth/google';
 import React from 'react'
-
+import { useNavigate } from "react-router-dom";
 
 function LoginGoogle() {
+  const navigate = useNavigate();
   const responseGoogle = (response) => {
     console.log(response.credential)
     if (response.credential){
@@ -19,6 +20,7 @@ function LoginGoogle() {
       .then((response) => {
         console.log(response.access_token)
         localStorage.setItem('reservation_jwt', response.access_token);
+        navigate("/");
       });
     }
 }

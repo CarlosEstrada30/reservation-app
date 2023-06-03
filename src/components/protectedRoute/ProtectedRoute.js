@@ -6,7 +6,7 @@ export const ProtectedRoute = ({
   children,
 }) => {
     let flag = false;
-
+    console.log("verificando token")
     //check user has JWT token
     localStorage.getItem("reservation_jwt") ? flag=true : flag=false
 

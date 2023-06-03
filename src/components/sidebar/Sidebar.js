@@ -76,7 +76,12 @@ function Sidebar(props) {
                 id="sidebar"
               >
                 <Menu vertical borderless fluid text>
-                  <Menu.Item active as={Link} to='/calendar'>
+                  <Menu.Item active as={Link} to='/'>
+                    Calendar
+                  </Menu.Item>
+                </Menu>
+                <Menu vertical borderless fluid text>
+                  <Menu.Item as={Link} to='/reservation'>
                     Calendar
                   </Menu.Item>
                 </Menu>

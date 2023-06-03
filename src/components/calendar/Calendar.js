@@ -63,7 +63,6 @@ const handleDeleteEvent = () =>{
     setInitialEvents(newEvents)
     resetData()
     setOpen(false)
-    console.log("Termino ---")
   });
  
   
