@@ -1,15 +1,8 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Header,
-  Image,
-  Modal,
-  Checkbox,
-  Form,
-  Label,
-} from "semantic-ui-react";
-import SemanticDatepicker from 'react-semantic-ui-datepickers';
-import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
+import { Button, TextField, Typography } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 function FormReservation(props) {
   const [startDate, setStartDate] = useState(null);
@@ -21,49 +14,48 @@ function FormReservation(props) {
   };
 
   return (
-    <Form as={Form} onSubmit={handleSubmit}>
-      <Form.Field>
-        <label>Nombre</label>
-        <input
+    <form onSubmit={handleSubmit}>
+      <div>
+        <Typography variant="h6">Nombre</Typography>
+        <TextField
           placeholder="First Name"
           onChange={(event) => props.setTitle(event.target.value)}
           value={props.title}
+          variant="outlined"
+          margin="normal"
+          fullWidth
         />
-      </Form.Field>
-      <Form.Field>
-        <label>Telefono</label>
-        <input
+      </div>
+      <div>
+        <Typography variant="h6">Telefono</Typography>
+        <TextField
           placeholder="Last Name"
           onChange={(event) => props.setPhone(event.target.value)}
           value={props.phone}
+          variant="outlined"
+          margin="normal"
+          fullWidth
         />
-      </Form.Field>
-      <Form.Field>
-        <label>Date</label>
-        <SemanticDatepicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          Format="yyyy-MM-dd"
-          placeholderText="Select a date"
-        />
-      </Form.Field>
+      </div>
+      <div>
+        <Typography variant="h6">Date</Typography>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker />
+        </LocalizationProvider>
+      </div>
 
       {props.token && (
-        <Button color="red" onClick={() => props.handleDeleteEvent()}>
+        <Button color="secondary" onClick={() => props.handleDeleteEvent()}>
           Eliminar
         </Button>
       )}
-      <Button color="black" onClick={() => props.setOpen(false)}>
-        Cerrar
+      <Button color="secondary" onClick={() => props.setOpen(false)}>
+        Cancelar
       </Button>
-      <Button
-        type="submit"
-        content={props.token ? "Actualizar" : "Reservar"}
-        labelPosition="right"
-        icon="checkmark"
-        positive
-      />
-    </Form>
+      <Button type="submit" variant="outlined">
+        {props.token ? "Actualizar" : "Reservar"}
+      </Button>
+    </form>
   );
 }
 

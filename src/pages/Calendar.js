@@ -4,9 +4,7 @@ import Sidebar from '../components/sidebar/Sidebar'
 
 
 const CalendarPage = () => (
-    <Sidebar>
         <Calendar/>
-    </Sidebar>
 )
 
 export default CalendarPage

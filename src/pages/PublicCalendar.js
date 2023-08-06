@@ -1,12 +1,18 @@
 import React from 'react'
 import Calendar from '../components/calendar/Calendar'
-import Sidebar from '../components/sidebar/Sidebar'
+import { Container, Typography, Divider } from "@mui/material";
 
 
 const PublicCalendar = () => (
-    <Sidebar title="Public Calendar">
+    <Container>
+        <Typography gutterBottom variant="h4" align="center">
+            Calendario de Reservaciones
+        </Typography>
+        <Divider/>
+
         <Calendar/>
-    </Sidebar>
+
+    </Container>
 )
 
 export default PublicCalendar

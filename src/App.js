@@ -1,42 +1,34 @@
-
-
-import React, { useState } from "react";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import "semantic-ui-css/semantic.min.css";
-
+import React from "react";
 import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
-import CalendarPage from "./pages/Calendar";
+import LoginPage from './pages/Login'
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+// import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
+// import CalendarPage from "./pages/Calendar";
 import PublicCalendar from "./pages/PublicCalendar";
 import NewReservation from "./pages/NewReservation";
-import LoginPage from './pages/Login'
+// import LoginPage from "./pages/Login";
+import CustomAppBar from "./components/appBar/AppBar";
 
-import "./App.css";
+// import "./App.css";
 
 function App() {
-  const [user, setUser] = useState(null);
-
-  const login = () =>
-    setUser({
-      id: 1,
-      name: "John",
-      permissions: ["analize"],
-      roles: ["admin"],
-    });
-  const logout = () => setUser(null);
-
-    return (
-      <BrowserRouter>
-      <Routes>
+  const isLogin = localStorage.getItem("reservation_jwt") ? true : false;
+  console.log(isLogin)
+  return (
+    <BrowserRouter>
+      <div>
+      {isLogin == true  &&
+        <CustomAppBar />
+      }
+        <Routes>
         <Route path="/login" element={<LoginPage />} />
-        
-        <Route>
-          <Route path="/" element={<ProtectedRoute redirectTo="/login"><CalendarPage/></ProtectedRoute>} />
-          <Route path="/public-calendar" element={<PublicCalendar/>} />
-          <Route path="/reservation" element={<NewReservation/>} />
-        </Route>
-      </Routes>
+          <Route path="/" element={<ProtectedRoute redirectTo="/login"><PublicCalendar/></ProtectedRoute>} />
+          <Route path="/calendar" element={<PublicCalendar />} />
+        </Routes>
+       
+      </div>
     </BrowserRouter>
-    );
-  }
+  );
+}
 
 export default App;
