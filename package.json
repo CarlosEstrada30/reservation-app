@@ -1,7 +1,7 @@
 {
   "name": "reservation-app",
   "version": "0.1.0",
-  "homepage": "https://carlosestrada30.github.io/reservationapp",
+  "homepage": "https://CarlosEstrada30.github.io/reservation-app",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
