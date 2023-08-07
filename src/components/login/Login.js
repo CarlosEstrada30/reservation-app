@@ -20,23 +20,6 @@ const Login = () => {
         .catch(error => {
           console.error('Error en la solicitud:', error);
         });
-
-
-
-      // fetch(process.env.REACT_APP_API_URL+'/auth?token='+ response.credential,{
-      //   method: 'GET',
-      //   mode: 'cors',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   }})
-      // .then((response) => {
-      //   return response.json();
-      // })
-      // .then((response) => {
-      //   console.log(response.access_token)
-      //   localStorage.setItem('reservation_jwt', response.access_token);
-      //   navigate("/reservation-app");
-      // });
     }
 }
 
