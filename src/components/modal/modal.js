@@ -55,16 +55,6 @@ export default function ModalForm(props) {
                 fullWidth
               />
             </div>
-            {/* <div>
-              <Typography variant="h6">Date</Typography>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateTimePicker 
-                value={selectedDate}
-                format="dd/MM/yyyy HH:mm"
-                renderInput={(props) => <TextField {...props} />}
-                 />
-              </LocalizationProvider>
-            </div> */}
           </DialogContent>
           <DialogActions>
           {props.token && (
