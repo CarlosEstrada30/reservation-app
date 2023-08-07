@@ -1,7 +1,6 @@
 import axiosInstance  from '../../providers/axios.provider'
 import  handleResponse  from '../../providers'
 
-console.log(process.env.REACT_APP_API_URL)
 const api = process.env.REACT_APP_API_URL+'/event'
 
 const getEvents = () =>
