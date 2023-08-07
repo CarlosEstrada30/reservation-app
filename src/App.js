@@ -20,8 +20,8 @@ function App() {
         <CustomAppBar />
       }
         <Routes>
-        <Route path="/login" element={<LoginPage />} />
-          <Route path="/reservation-app" element={<ProtectedRoute redirectTo="/login"><PublicCalendar/></ProtectedRoute>} />
+        <Route path="/reservation-app/login" element={<LoginPage />} />
+          <Route path="/reservation-app" element={<ProtectedRoute redirectTo="/reservation-app/login"><PublicCalendar/></ProtectedRoute>} />
         </Routes>
        
       </div>

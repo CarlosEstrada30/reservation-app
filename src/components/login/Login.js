@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
-import {Button, Container, Grid, Paper, TextField, Typography } from '@mui/material';
+import {Container, Paper, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
 
@@ -10,11 +10,12 @@ const Login = () => {
   const responseGoogle = (response) => {
     console.log(response.credential)
     if (response.credential){
-      fetch('http://localhost:5000/auth?token='+ response.credential,{
-        credentials: 'include',
-        // To cause browsers to send a request with credentials included on both same-origin and cross-origin calls, 
-        // add credentials: 'include' to the init object you pass to the fetch() method.
-       })
+      fetch(process.env.REACT_APP_API_URL+'/auth?token='+ response.credential,{
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        }})
       .then((response) => {
         return response.json();
       })
