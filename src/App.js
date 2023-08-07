@@ -13,7 +13,6 @@ import CustomAppBar from "./components/appBar/AppBar";
 
 function App() {
   const isLogin = localStorage.getItem("reservation_jwt") ? true : false;
-  console.log(isLogin)
   return (
     <BrowserRouter>
       <div>
@@ -22,8 +21,7 @@ function App() {
       }
         <Routes>
         <Route path="/login" element={<LoginPage />} />
-          <Route path="/" element={<ProtectedRoute redirectTo="/login"><PublicCalendar/></ProtectedRoute>} />
-          <Route path="/calendar" element={<PublicCalendar />} />
+          <Route path="/reservation-app" element={<ProtectedRoute redirectTo="/login"><PublicCalendar/></ProtectedRoute>} />
         </Routes>
        
       </div>

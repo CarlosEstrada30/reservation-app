@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 export const ProtectedRoute = ({
   isAllowed,
-  redirectTo = "/",
+  redirectTo = "/reservation-app",
   children,
 }) => {
     let flag = false;

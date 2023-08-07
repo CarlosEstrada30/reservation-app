@@ -90,7 +90,7 @@ function CustomAppBar() {
             >
             <MenuItem key={'Calendar'} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                  <Link to='/calendar'> CALENDARIO</Link></Typography>
+                  <Link to='/reservation-app'> CALENDARIO</Link></Typography>
             </MenuItem>
             </Menu>
           </Box>
@@ -119,7 +119,7 @@ function CustomAppBar() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link to='/calendar'>Calendarion</Link>
+                <Link to='/reservation-app'>Calendarion</Link>
               </Button>
     
           </Box>
@@ -148,7 +148,7 @@ function CustomAppBar() {
             >
               <MenuItem key={'Reservation'} onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
-                <Link to='/calendar'> CALENDARIO</Link>
+                <Link to='/reservation-app'> CALENDARIO</Link>
                 </Typography>
             </MenuItem>
             </Menu>

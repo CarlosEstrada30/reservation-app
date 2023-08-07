@@ -21,7 +21,7 @@ const Login = () => {
       .then((response) => {
         console.log(response.access_token)
         localStorage.setItem('reservation_jwt', response.access_token);
-        navigate("/");
+        navigate("/reservation-app");
       });
     }
 }
