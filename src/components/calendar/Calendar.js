@@ -115,13 +115,14 @@ function Calendar() {
   return (<>
               <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                contentHeight="auto"
                 themeSystem="Darkly"
                 headerToolbar={{
                   left: "prev,next today",
                   center: "title",
-                  right: "dayGridMonth,timeGridWeek,timeGridDay",
+                  right: "timeGridWeek,timeGridDay",
                 }}
-                initialView="timeGridWeek"
+                initialView="timeGridDay"
                 slotMinTime="08:00:00"
                 editable={true}
                 selectable={true}
@@ -135,6 +136,7 @@ function Calendar() {
                 // eventAdd={function(){}}
                 eventChange={handleEventChange}
                 // eventRemove={function(){}}
+                eventLongPressDelay={100}
               />
               <ModalForm 
                   open={open}
