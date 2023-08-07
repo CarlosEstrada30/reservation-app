@@ -2,6 +2,7 @@ import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import {Container, Paper, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 
 const Login = () => {
@@ -10,20 +11,32 @@ const Login = () => {
   const responseGoogle = (response) => {
     console.log(response.credential)
     if (response.credential){
-      fetch(process.env.REACT_APP_API_URL+'/auth?token='+ response.credential,{
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        }})
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        console.log(response.access_token)
-        localStorage.setItem('reservation_jwt', response.access_token);
-        navigate("/reservation-app");
-      });
+      axios.get(process.env.REACT_APP_API_URL+'/auth?token='+ response.credential)
+        .then(response => {
+          console.log('Respuesta del servidor:', response.data);
+          localStorage.setItem('reservation_jwt', response.data.access_token);
+          navigate("/reservation-app");
+        })
+        .catch(error => {
+          console.error('Error en la solicitud:', error);
+        });
+
+
+
+      // fetch(process.env.REACT_APP_API_URL+'/auth?token='+ response.credential,{
+      //   method: 'GET',
+      //   mode: 'cors',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   }})
+      // .then((response) => {
+      //   return response.json();
+      // })
+      // .then((response) => {
+      //   console.log(response.access_token)
+      //   localStorage.setItem('reservation_jwt', response.access_token);
+      //   navigate("/reservation-app");
+      // });
     }
 }
 
