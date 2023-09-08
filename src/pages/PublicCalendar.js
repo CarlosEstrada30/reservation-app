@@ -1,18 +1,11 @@
 import React from 'react'
 import Calendar from '../components/calendar/Calendar'
+import ResponsiveCalendar from '../components/calendar/ResponsiveCalendar';
 import { Container, Typography, Divider } from "@mui/material";
 
 
 const PublicCalendar = () => (
-    <Container>
-        <Typography gutterBottom variant="h4" align="center">
-            Calendario de Reservaciones
-        </Typography>
-        <Divider/>
-
-        <Calendar/>
-
-    </Container>
+        <ResponsiveCalendar/>
 )
 
 export default PublicCalendar

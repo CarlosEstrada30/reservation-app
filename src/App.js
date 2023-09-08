@@ -16,12 +16,9 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-      {isLogin == true  &&
-        <CustomAppBar />
-      }
         <Routes>
         <Route path="/reservation-app/login" element={<LoginPage />} />
-          <Route path="/reservation-app" element={<ProtectedRoute redirectTo="/reservation-app/login"><PublicCalendar/></ProtectedRoute>} />
+        <Route path="/reservation-app" element={<ProtectedRoute redirectTo="/reservation-app/login"><PublicCalendar/></ProtectedRoute>} />
         </Routes>
        
       </div>
