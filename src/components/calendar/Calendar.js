@@ -5,7 +5,6 @@ import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import ModalForm from '../modal/modal';
-// import { Button, Sidebar, Popup } from 'semantic-ui-react';
 import { calendarService } from "./Calendar.service";
 function Calendar() {
   const [initailEvents, setInitialEvents] = useState([]);
