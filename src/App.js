@@ -13,7 +13,7 @@ function App() {
       <div>
         <Routes>
         <Route path="/reservation-app/login" element={<LoginPage />} />
-        <Route path="/reservation-app" element={<ProtectedRoute redirectTo="/reservation-app/login"><PublicCalendar/></ProtectedRoute>} />
+        <Route path="/reservation-app" element={<PublicCalendar/>} />
         </Routes>
        
       </div>
