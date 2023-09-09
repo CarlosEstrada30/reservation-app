@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/reservation-app/static/css/main.b14ce446.css",
-    "main.js": "/reservation-app/static/js/main.7a8bac02.js",
+    "main.js": "/reservation-app/static/js/main.c7baf49c.js",
     "static/js/787.f4e07bd0.chunk.js": "/reservation-app/static/js/787.f4e07bd0.chunk.js",
     "static/media/roboto-latin-500-normal.woff2": "/reservation-app/static/media/roboto-latin-500-normal.f25d774ecfe0996f8eb5.woff2",
     "static/media/roboto-latin-700-normal.woff2": "/reservation-app/static/media/roboto-latin-700-normal.227c93190fe7f82de3f8.woff2",
@@ -61,11 +61,11 @@
     "static/media/roboto-greek-ext-700-normal.woff": "/reservation-app/static/media/roboto-greek-ext-700-normal.249853776d22a271b2b5.woff",
     "index.html": "/reservation-app/index.html",
     "main.b14ce446.css.map": "/reservation-app/static/css/main.b14ce446.css.map",
-    "main.7a8bac02.js.map": "/reservation-app/static/js/main.7a8bac02.js.map",
+    "main.c7baf49c.js.map": "/reservation-app/static/js/main.c7baf49c.js.map",
     "787.f4e07bd0.chunk.js.map": "/reservation-app/static/js/787.f4e07bd0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b14ce446.css",
-    "static/js/main.7a8bac02.js"
+    "static/js/main.c7baf49c.js"
   ]
 }
