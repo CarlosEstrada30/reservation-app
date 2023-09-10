@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "@mobiscroll/react/dist/css/mobiscroll.min.css";
+import { momentTimezone } from '@mobiscroll/react';
+import moment from 'moment-timezone';
 import {
   Eventcalendar,
   snackbar,
@@ -53,6 +55,8 @@ const colors = [
   "#4baf4f",
   "#7e5d4e",
 ];
+
+momentTimezone.moment = moment;
 
 function ResponsiveCalendar() {
   const [myEvents, setMyEvents] = React.useState([]);
@@ -397,6 +401,9 @@ function ResponsiveCalendar() {
             responsive={responsiveOptions}
             onChange={dateChange}
             value={popupEventDate}
+            dataTimezone='local'
+            displayTimezone='local'
+            timezonePlugin={momentTimezone}
           />
           {isEdit && (
             <div className="mbsc-button-group">
