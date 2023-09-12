@@ -358,6 +358,9 @@ function ResponsiveCalendar() {
   return (
     <div>
       <Eventcalendar
+        dataTimezone='local'
+        displayTimezone='local'
+        timezonePlugin={momentTimezone}
         view={viewSettings}
         data={myEvents}
         clickToCreate="double"
